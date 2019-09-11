@@ -4,7 +4,10 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "server": "nodemon --exec babel-node server.js --delay 2"
+    "clienet-install": "npm install --prefix ../frontend",
+    "server": "nodemon --exec babel-node server.js --delay 2",
+    "client": "npm start --prefix ../frontend",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "",
   "license": "ISC",
