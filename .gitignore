@@ -91,10 +91,3 @@ typings/
 config
 config/
 .config/
-
-# 필요없는 것들
-idea
-idea/
-.idea/
-.DS_Store
-package-lock.json
