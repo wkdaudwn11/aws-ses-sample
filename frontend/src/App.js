@@ -49,7 +49,8 @@ const Wrap = styled.div`
 
 export default class App extends Component {
   state = {
-    email: ''
+    email: '',
+    email2: ''
   };
 
   inputEmail = null;
@@ -63,8 +64,13 @@ export default class App extends Component {
   onSubmit = e => {
     e.preventDefault();
 
+    const sendData = [
+      { email: this.state.email },
+      { email: this.state.email2 }
+    ];
+
     axios
-      .get('/mail', this.state.email)
+      .post('/mail', sendData)
       .then(res => console.log(res.data))
       .catch(err => this.setState({ errors: err.response.data }));
   };
@@ -85,7 +91,7 @@ export default class App extends Component {
         <div className='title'>Welcome to AWS SES sample.</div>
         <div className='contents'>
           <form onSubmit={this.onSubmit}>
-            <span>
+            <div>
               <input
                 type='email'
                 name='email'
@@ -96,11 +102,28 @@ export default class App extends Component {
                 ref={ref => {
                   this.inputEmail = ref;
                 }}
+                style={{ width: '200px' }}
               />
-            </span>
-            <span>
-              <button type='submit'>이메일 보내기</button>
-            </span>
+            </div>
+            <div>
+              <input
+                type='email'
+                name='email2'
+                placeholder='보내실 이메일을 입력해주세요.'
+                value={this.state.email2}
+                onChange={this.onChange}
+                onKeyPress={this.onKeyPress}
+                ref={ref => {
+                  this.inputEmail = ref;
+                }}
+                style={{ width: '200px' }}
+              />
+            </div>
+            <div>
+              <button type='submit' style={{ width: '205px' }}>
+                이메일 보내기
+              </button>
+            </div>
           </form>
         </div>
       </Wrap>

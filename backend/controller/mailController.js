@@ -8,9 +8,14 @@ module.exports = {
    * @desc        sendEmail
    */
   sendEmail: async (req, res) => {
+    const receiveEmail = req.body.map(receive => {
+      return receive.email;
+    });
+
     let params = {
       Destination: {
-        ToAddresses: ['wkdaudwn11@ddive.co.kr'], // 받는 사람 이메일 주소
+        //ToAddresses: ['wkdaudwn11@naver.com', 'wkdaudwn1028@naver.com'], // 받는 사람 이메일 주소
+        ToAddresses: receiveEmail,
         CcAddresses: [], // 참조
         BccAddresses: [] // 숨은 참조
       },
@@ -41,15 +46,15 @@ module.exports = {
       .sendEmail(params)
       .promise();
 
-    //promise객체 실행 / 에러처리
+    // promise객체 실행 / 에러처리
     sendPromise
       .then(function(data) {
         console.log(data.MessageId);
-        res.send('Email send success');
+        res.status(200).json({ message: 'success' });
       })
       .catch(function(err) {
         console.error(err, err.stack);
-        res.send('Email send fail');
+        res.status(200).json({ message: 'fail' });
       });
   }
 };

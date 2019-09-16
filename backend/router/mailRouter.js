@@ -4,10 +4,10 @@ const router = express.Router();
 import mailController from '../controller/mailController';
 
 /**
- * @route   GET /mail
+ * @route   POST /mail
  * @desc    sendEmail
  * @access  Public
  */
-router.route('/').get(mailController.sendEmail);
+router.route('/').post(mailController.sendEmail);
 
 module.exports = router;
